@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('contrat_de_bails', function (Blueprint $table) {
+            $table->id();
+            $table->date('date_debut');
+            $table->date('date_fin');
+            $table->string('pdf')->nullable();
+            $table->decimal('loyer_mensuel');
+            $table->decimal('caution')->nullable();
+            $table->enum('statut', ['actif', 'expire', 'resilie'])->default('actif');
+            $table->foreignId('locataire_id')->constrained('locataires')->onDelete('cascade');
+            $table->foreignId('maison_id')->constrained('maisons')->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('contrat_de_bails');
+    }
+};

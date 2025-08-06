@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ContratDeBail;
+use App\Models\Locataire;
+use App\Models\Maison;
+use Illuminate\Http\Request;
+
+class ContratDeBailController extends Controller
+{
+    public function index()
+    {
+        $contrats = ContratDeBail::with('locataire', 'maison')->get();
+        return view('contrat_de_bails.index', compact('contrats'));
+    }
+
+    public function create()
+    {
+        $locataires = Locataire::all();
+        $maisons = Maison::where('statut', 'libre')->get();
+        return view('contrat_de_bails.create', compact('locataires', 'maisons'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after:date_debut',
+            'pdf' => 'nullable|file',
+            'loyer_mensuel' => 'required|numeric|min:0',
+            'caution' => 'nullable|numeric|min:0',
+            'statut' => 'required|in:actif,expire,resilie',
+            'locataire_id' => 'required|exists:locataires,id',
+            'maison_id' => 'required|exists:maisons,id'
+        ]);
+        
+        if ($request->hasFile('pdf')) {
+        $validated['pdf'] = $request->file('pdf')->store('pdfs', 'public');
+    }
+
+        ContratDeBail::create($request->all());
+        
+        // Mettre à jour le statut de la maison
+        Maison::find($request->maison_id)->update(['statut' => 'occupé']);
+        
+        return redirect()->route('contrat_de_bails.index')->with('success', 'Contrat créé avec succès');
+    }
+
+    public function show(ContratDeBail $contratDeBail)
+    {
+        $contratDeBail->load('locataire', 'maison.proprietaire');
+        return view('contrat_de_bails.show', compact('contratDeBail'));
+    }
+
+    public function edit(ContratDeBail $contratDeBail)
+    {
+        $locataires = Locataire::all();
+        $maisons = Maison::all();
+        return view('contrat_de_bails.edit', compact('contratDeBail', 'locataires', 'maisons'));
+    }
+
+    public function update(Request $request, ContratDeBail $contratDeBail)
+    {
+        $request->validate([
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after:date_debut',
+            'pdf' => 'nullable|string|max:255',
+            'loyer_mensuel' => 'required|numeric|min:0',
+            'caution' => 'nullable|numeric|min:0',
+            'statut' => 'required|in:actif,expire,resilie',
+            'locataire_id' => 'required|exists:locataires,id',
+            'maison_id' => 'required|exists:maisons,id'
+        ]);
+
+        $contratDeBail->update($request->all());
+        return redirect()->route('contrat_de_bails.index')->with('success', 'Contrat modifié avec succès');
+    }
+
+    public function destroy(ContratDeBail $contratDeBail)
+    {
+        // Libérer la maison
+        $contratDeBail->maison->update(['statut' => 'libre']);
+        
+        $contratDeBail->delete();
+        return redirect()->route('contrat_de_bails.index')->with('success', 'Contrat supprimé avec succès');
+    }
+}
