@@ -41,5 +41,50 @@ class LocataireSeeder extends Seeder
             'nationalite' => 'Togolaise',
             'situation_matrimoniale' => 'Divorcé',
         ]);
-    }
-}
+
+        Locataire::create([
+        'nom' => 'MENSAH',
+        'prenom' => 'Akosua',
+        'telephone' => '92987654',
+        'email' => 'akosua.mensah@hotmail.com',
+        'carte_identite_recto' => '0743-891-234',
+        'carte_identite_verso' => '0743-891-235',
+        'nationalite' => 'Ghanéenne',
+        'situation_matrimoniale' => 'Veuf/Veuve',
+        ]);
+
+        Locataire::create([
+        'nom' => 'DIABRE',
+        'prenom' => 'Fatou',
+        'telephone' => '90876543',
+        'email' => 'fatou.diabre@outlook.com',
+        'carte_identite_recto' => '0856-345-678',
+        'carte_identite_verso' => '0856-345-679',
+        'nationalite' => 'Burkinabé',
+        'situation_matrimoniale' => 'Marié(e)',
+        ]);
+
+        Locataire::create([
+        'nom' => 'TRAORE',
+        'prenom' => 'Sekou',
+        'telephone' => '93456789',
+        'email' => 'sekou.traore@gmail.com',
+        'carte_identite_recto' => '0912-456-789',
+        'carte_identite_verso' => '0912-456-790',
+        'nationalite' => 'Malienne',
+        'situation_matrimoniale' => 'Divorcé(e)',
+        ]);
+
+
+        Locataire::create([
+        'nom' => 'OUEDRAOGO',
+        'prenom' => 'Aminata',
+        'telephone' => '94321087',
+        'email' => 'aminata.ouedraogo@yahoo.com',
+        'carte_identite_recto' => '1024-567-890',
+        'carte_identite_verso' => '1024-567-891',
+        'nationalite' => 'Nigérienne',
+        'situation_matrimoniale' => 'Célibataire',
+        ]);
+        } 
+    } 

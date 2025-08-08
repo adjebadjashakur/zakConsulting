@@ -33,6 +33,8 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                     <a href="{{ route('proprietaires.show', $proprietaire) }}" class="text-blue-600 hover:text-blue-900">Voir</a>
                     <a href="{{ route('proprietaires.edit', $proprietaire) }}" class="text-yellow-600 hover:text-yellow-900">Modifier</a>
+                    <a href="{{ route('proprietaires.details', $proprietaire->id) }}" class="text-blue-600 hover:text-blue-900">Détails</a>
+
                     <form action="{{ route('proprietaires.destroy', $proprietaire) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')

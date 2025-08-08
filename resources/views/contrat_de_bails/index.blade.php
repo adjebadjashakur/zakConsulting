@@ -22,22 +22,28 @@
                 <th class="px-4 py-2 text-left">Maison</th>
                 <th class="px-4 py-2 text-left">Début</th>
                 <th class="px-4 py-2 text-left">Fin</th>
-                {{-- <th class="px-4 py-2 text-left">Loyer</th>
-                <th class="px-4 py-2 text-left">Caution</th> --}}
+                {{-- <th class="px-4 py-2 text-left">Loyer</th> --}}
+                {{-- <th class="px-4 py-2 text-left">Caution</th> --}}
                 <th class="px-4 py-2 text-left">Statut</th>
                 <th class="px-4 py-2 text-left">Actions</th>
             </tr>
-    </thead>
+        </thead>
         <tbody class="divide-y divide-gray-100">
             @foreach($contrats as $contrat)
             <tr>
-                <td class="px-4 py-2">{{ $contrat->locataire->nom }}</td>
-                <td class="px-4 py-2">{{ $contrat->maison->nom }}</td>
-                <td class="px-4 py-2">{{ $contrat->date_debut->format('d/m/Y') }}</td>
-                <td class="px-4 py-2">{{ $contrat->date_fin->format('d/m/Y') }}</td>
-                {{-- <td class="px-4 py-2">{{ $contrat->loyer_mensuel }} </td> --}}
-                {{-- <td class="px-4 py-2">{{ $contrat->caution }}</td> --}}
-                <td class="px-4 py-2">{{ $contrat->statut }}</td>
+                <td class="px-4 py-2">
+                    {{ $contrat->locataire->nom }} {{ $contrat->locataire->prenom ?? '' }}
+                </td>
+                <td class="px-4 py-2">{{ $contrat->maison->nom ?? '—' }}</td>
+                <td class="px-4 py-2">
+                    {{ \Carbon\Carbon::parse($contrat->date_debut)->format('d/m/Y') }}
+                </td>
+                <td class="px-4 py-2">
+                    {{ \Carbon\Carbon::parse($contrat->date_fin)->format('d/m/Y') }}
+                </td>
+                {{-- <td class="px-4 py-2">{{ number_format($contrat->loyer_mensuel ?? 0, 0, ',', ' ') }} FCFA</td> --}}
+                {{-- <td class="px-4 py-2">{{ number_format($contrat->caution ?? 0, 0, ',', ' ') }} FCFA</td> --}}
+                <td class="px-4 py-2 capitalize">{{ $contrat->statut }}</td>
                 <td class="px-4 py-2 space-x-2">
                     <a href="{{ route('contrat_de_bails.show', $contrat) }}" class="text-blue-600 hover:underline">Voir</a>
                     <a href="{{ route('contrat_de_bails.edit', $contrat) }}" class="text-yellow-600 hover:underline">Modifier</a>
@@ -52,5 +58,4 @@
         </tbody>
     </table>
 </div>
-
 @endsection

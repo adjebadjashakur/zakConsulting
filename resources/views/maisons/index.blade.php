@@ -39,12 +39,13 @@
                 <td class="px-6 py-4">{{ $maison->quartier }}</td>
                 <td class="px-6 py-4">{{ $maison->superficie }}</td>
                 <td class="px-6 py-4">{{ $maison->description }}</td>
-                <td class="px-6 py-4">{{ $maison->loyer_mensuel}}</td> 
+                <td class="px-6 py-4">{{  $maison->loyer_mensuel = $maison->chambres->sum('loyer_individuel');}}</td> 
                 <td class="px-6 py-4 capitalize">{{ $maison->statut }}</td>
                 <td class="px-6 py-4">{{ $maison->proprietaire->nom  }}</td>
                 <td class="px-6 py-4 text-sm space-x-2">
                     <a href="{{ route('maisons.show', $maison) }}" class="text-blue-600 hover:text-blue-900">Voir</a>
                     <a href="{{ route('maisons.edit', $maison) }}" class="text-yellow-600 hover:text-yellow-900">Modifier</a>
+                    <a href="{{ route('chambres.create') }}" class="text-green-600 hover:text-green-900">Créer une chambre</a> 
                     <form action="{{ route('maisons.destroy', $maison) }}" method="POST" class="inline" onsubmit="return confirm('Confirmer la suppression ?')">
                         @csrf
                         @method('DELETE')

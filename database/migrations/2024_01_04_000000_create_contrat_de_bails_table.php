@@ -13,11 +13,12 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->string('pdf')->nullable();
-            $table->decimal('loyer_mensuel');
+            $table->decimal('loyer_mensuel')->nullable();
             $table->decimal('caution')->nullable();
-            $table->enum('statut', ['actif', 'expire', 'resilie'])->default('actif');
+            $table->enum('statut', ['actif', 'suspendu', 'en_attente', 'termine'])->default('actif');
             $table->foreignId('locataire_id')->constrained('locataires')->onDelete('cascade');
             $table->foreignId('maison_id')->constrained('maisons')->onDelete('cascade');
+            $table->foreignId('chambre_id')->nullable()->constrained('chambres')->onDelete('cascade');
             $table->timestamps();
         });
     }

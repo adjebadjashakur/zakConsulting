@@ -29,4 +29,8 @@ class Locataire extends Model
     {
         return $this->hasMany(ContratDeBail::class);
     }
+    public function chambres()
+    {
+        return $this->hasOne(Chambre::class);
+    }   
 }

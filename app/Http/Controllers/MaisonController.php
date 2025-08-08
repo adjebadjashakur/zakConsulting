@@ -9,9 +9,8 @@ use Illuminate\Http\Request;
 class MaisonController extends Controller
 {
     public function index()
-    {
-        
-        $maisons = Maison::with('proprietaire')->get();
+    { 
+        $maisons = Maison::with(['proprietaire', 'chambres'])->get();
         return view('maisons.index', compact('maisons'));
     }
 

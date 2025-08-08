@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProprietaireController;
+use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\MaisonController;
 use App\Http\Controllers\LocataireController;
 use App\Http\Controllers\ContratDeBailController;
@@ -12,6 +13,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/proprietaires/{id}/details', [ProprietaireController::class, 'indexWithDetails'])->name('proprietaires.details');
 
 // Authentification
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -21,6 +23,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Routes protégées
 Route::middleware(['auth'])->group(function () {
+
+// Routes Chambres
+Route::get('/chambres', [ChambreController::class, 'index'])->name('chambres.index');
+Route::get('/chambres/create', [ChambreController::class, 'create'])->name('chambres.create');
+Route::post('/chambres', [ChambreController::class, 'store'])->name('chambres.store');
+Route::get('/chambres/{chambre}', [ChambreController::class, 'show'])->name('chambres.show');
+Route::get('/chambres/{chambre}/edit', [ChambreController::class, 'edit'])->name('chambres.edit');
+Route::put('/chambres/{chambre}', [ChambreController::class, 'update'])->name('chambres.update');
+Route::delete('/chambres/{chambre}', [ChambreController::class, 'destroy'])->name('chambres.destroy');
 
 // Routes Propriétaires
 Route::get('/proprietaires', [ProprietaireController::class, 'index'])->name('proprietaires.index');

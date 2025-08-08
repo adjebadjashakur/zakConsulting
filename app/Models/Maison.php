@@ -29,4 +29,8 @@ class Maison extends Model
     {
         return $this->hasMany(ContratDeBail::class);
     }
+    public function chambres()
+    {
+        return $this->hasMany(Chambre::class);
+    }   
 }

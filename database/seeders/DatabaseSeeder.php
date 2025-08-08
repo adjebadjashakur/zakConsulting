@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProprietaireSeeder::class,
             MaisonSeeder::class,
+            ChambreSeeder::class,
             LocataireSeeder::class,
             ContratDeBailSeeder::class,
             RapportImmobilierSeeder::class,

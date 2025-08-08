@@ -11,7 +11,7 @@ class ContratDeBailController extends Controller
 {
     public function index()
     {
-        $contrats = ContratDeBail::with('locataire', 'maison')->get();
+        $contrats = ContratDeBail::with('locataire', 'maison', 'chambre')->get();
         return view('contrat_de_bails.index', compact('contrats'));
     }
 
@@ -32,9 +32,18 @@ class ContratDeBailController extends Controller
             'caution' => 'nullable|numeric|min:0',
             'statut' => 'required|in:actif,expire,resilie',
             'locataire_id' => 'required|exists:locataires,id',
-            'maison_id' => 'required|exists:maisons,id'
+            'maison_id' => 'required|exists:maisons,id',
+            'chambre_id' => 'nullable|exists:chambres,id'
         ]);
-        
+            $data = $request->all();
+
+        // Calculer 10% du loyer
+        $caution_auto = $request->loyer_mensuel * 0.10;
+
+        // Si caution non renseignée, on fixe la caution à 10% du loyer
+        if (empty($request->caution)) {
+            $data['caution'] = $caution_auto;
+        }
         if ($request->hasFile('pdf')) {
         $validated['pdf'] = $request->file('pdf')->store('pdfs', 'public');
     }
@@ -70,7 +79,8 @@ class ContratDeBailController extends Controller
             'caution' => 'nullable|numeric|min:0',
             'statut' => 'required|in:actif,expire,resilie',
             'locataire_id' => 'required|exists:locataires,id',
-            'maison_id' => 'required|exists:maisons,id'
+            'maison_id' => 'required|exists:maisons,id',
+            'chambre_id' => 'nullable|exists:chambres,id'
         ]);
 
         $contratDeBail->update($request->all());

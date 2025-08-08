@@ -36,4 +36,9 @@ class ContratDeBail extends Model
     {
         return $this->belongsTo(Maison::class);
     }
+    public function chambre()
+    {
+        return $this->belongsTo(Chambre::class);
+    }
+    
 }

@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Storage;
 
 class ProprietaireController extends Controller
 {
+public function indexWithDetails($id)
+{
+    $proprietaire = Proprietaire::with(['maisons.contratDeBails.locataire'])
+        ->findOrFail($id);
+
+    return view('proprietaires.details', compact('proprietaire'));
+}
+
+
+
+
     public function index()
     {
         $proprietaires = Proprietaire::with('maisons')->get();

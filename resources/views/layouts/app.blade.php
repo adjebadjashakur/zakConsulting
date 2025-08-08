@@ -22,6 +22,7 @@
                     {{-- <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Tableau de bord</a> --}}
                     <a href="{{ route('proprietaires.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Propriétaires</a>
                     <a href="{{ route('maisons.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Maisons</a>
+                    <a href="{{ route('chambres.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Chambres</a>
                     <a href="{{ route('locataires.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Locataires</a>
                     <a href="{{ route('contrat_de_bails.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Contrats</a>
                 </div>
