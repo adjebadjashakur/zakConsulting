@@ -10,7 +10,8 @@ class MaisonController extends Controller
 {
     public function index()
     { 
-        $maisons = Maison::with(['proprietaire', 'chambres'])->get();
+        // Utiliser paginate() au lieu de get() pour avoir la pagination
+        $maisons = Maison::with(['proprietaire', 'chambres'])->paginate(5);
         return view('maisons.index', compact('maisons'));
     }
 
@@ -39,7 +40,8 @@ class MaisonController extends Controller
 
     public function show(Maison $maison)
     {
-        $maison->load('proprietaire', 'contratDeBails.locataire');
+        // Charger les chambres avec leurs locataires pour la vue show
+        $maison->load(['proprietaire', 'chambres.locataire']);
         return view('maisons.show', compact('maison'));
     }
 
@@ -68,6 +70,8 @@ class MaisonController extends Controller
 
     public function destroy(Maison $maison)
     {
+        // Supprimer les chambres associées en premier (si cascade n'est pas configuré)
+        $maison->chambres()->delete();
         $maison->delete();
         return redirect()->route('maisons.index')->with('success', 'Maison supprimée avec succès');
     }

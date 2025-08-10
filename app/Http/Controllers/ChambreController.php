@@ -27,6 +27,7 @@ class ChambreController extends Controller
             'code_chambre' => 'required|string|unique:chambres,code_chambre|max:255',
             'type' => 'nullable|string|max:255',
             'loyer_individuel' => 'required|numeric|min:0',
+            'caution' => 'nullable|numeric|min:0',
             'statut' => 'required|in:libre,occupé,maintenance',
             'maison_id' => 'required|exists:maisons,id',
         ]);
@@ -54,6 +55,7 @@ class ChambreController extends Controller
             'code_chambre' => 'required|string|max:255|unique:chambres,code_chambre,' . $chambre->id,
             'type' => 'nullable|string|max:255',
             'loyer_individuel' => 'required|numeric|min:0',
+            'caution' => 'nullable|numeric|min:0',
             'statut' => 'required|in:libre,occupé,maintenance',
             'maison_id' => 'required|exists:maisons,id',
         ]);

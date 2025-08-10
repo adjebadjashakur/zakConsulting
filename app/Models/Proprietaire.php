@@ -29,4 +29,8 @@ class Proprietaire extends Model
     {
         return $this->hasMany(RapportImmobilier::class);
     }
+    public function contratDeBail()
+    {
+        return $this->hasOne(ContratDeBail::class);
+    }
 }

@@ -13,6 +13,7 @@ class Chambre extends Model
         'code_chambre',
         'type',
         'loyer_individuel',
+        'caution',
         'statut',
         'maison_id',
     ];

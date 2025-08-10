@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('code_chambre')->unique(); 
             $table->string('type')->nullable(); 
             $table->decimal('loyer_individuel')->nullable(); 
+            $table->decimal('caution')->nullable();
             $table->enum('statut', ['libre', 'occupé', 'maintenance'])->default('libre');
             $table->foreignId('maison_id')->constrained('maisons')->onDelete('cascade');
             $table->timestamps();

@@ -15,13 +15,15 @@ class ChambreSeeder extends Seeder
             'type' => 'Chambre simple',
             'loyer_individuel' => 25000,
             'statut' => 'libre',
-            'maison_id' => 1 
+            'caution' => 25000 * 0.10,
+            'maison_id' => 1
         ]);
 
         Chambre::create([
             'code_chambre' => 'CH-V1-02',
             'type' => 'Chambre double',
             'loyer_individuel' => 30000,
+            'caution' => 30000 * 0.10,
             'statut' => 'occupé',
             'maison_id' => 1
         ]);
@@ -29,6 +31,7 @@ class ChambreSeeder extends Seeder
             'code_chambre' => 'CH-V1-03',
             'type' => 'Chambre simple',
             'loyer_individuel' => 22000,
+            'caution' => 22000 * 0.10,
             'statut' => 'libre',
             'maison_id' => 1
         ]);
@@ -37,6 +40,7 @@ class ChambreSeeder extends Seeder
             'code_chambre' => 'CH-V2-01',
             'type' => 'Chambre double',
             'loyer_individuel' => 28000,
+            'caution' => 28000 * 0.10,
             'statut' => 'libre',
             'maison_id' => 2
         ]);
@@ -45,6 +49,7 @@ class ChambreSeeder extends Seeder
             'code_chambre' => 'CH-V2-02',
             'type' => 'Chambre simple',
             'loyer_individuel' => 20000,
+            'caution' => 20000 * 0.10,
             'statut' => 'maintenance',
             'maison_id' => 2
             
@@ -55,6 +60,7 @@ class ChambreSeeder extends Seeder
             'code_chambre' => 'CH-V3-01',
             'type' => 'Studio',
             'loyer_individuel' => 35000,
+            'caution' => 35000 * 0.10,
             'statut' => 'libre',
             'maison_id' => 3
         ]);

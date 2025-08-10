@@ -10,7 +10,7 @@ class ProprietaireController extends Controller
 {
 public function indexWithDetails($id)
 {
-    $proprietaire = Proprietaire::with(['maisons.contratDeBails.locataire'])
+    $proprietaire = Proprietaire::with(['maisons.contratDeBails.locataire', 'maisons.chambres.locataire'])
         ->findOrFail($id);
 
     return view('proprietaires.details', compact('proprietaire'));

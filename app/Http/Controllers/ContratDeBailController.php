@@ -2,24 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chambre;
 use App\Models\ContratDeBail;
 use App\Models\Locataire;
 use App\Models\Maison;
+use App\Models\Proprietaire;
+
 use Illuminate\Http\Request;
 
 class ContratDeBailController extends Controller
 {
     public function index()
     {
-        $contrats = ContratDeBail::with('locataire', 'maison', 'chambre')->get();
+        $contrats = ContratDeBail::with('locataire', 'proprietaire', 'maison', 'chambre')->get();
         return view('contrat_de_bails.index', compact('contrats'));
     }
-
-    public function create()
+    public function create(Request $request)
     {
+        $maisons = Maison::all();
+        $chambres = [];
+        $chambre = null;
         $locataires = Locataire::all();
-        $maisons = Maison::where('statut', 'libre')->get();
-        return view('contrat_de_bails.create', compact('locataires', 'maisons'));
+
+        if ($request->filled('maison_id')) {
+            $chambres = Chambre::where('maison_id', $request->maison_id)->get();
+        }
+
+        if ($request->filled('chambre_id')) {
+            $chambre = Chambre::find($request->chambre_id);
+        }
+
+        return view('contrat_de_bails.create', compact('maisons', 'chambres', 'chambre', 'locataires'));
     }
 
     public function store(Request $request)
