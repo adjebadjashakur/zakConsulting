@@ -23,7 +23,7 @@ class ContratDeBailSeeder extends Seeder
             'locataire_id' => 1,
             'maison_id' => 2,
             'chambre_id' => 4,
-            'loyer_mensuel' => loyerDeChambre(4),
+            'loyer' => loyerDeChambre(4),
             'caution' => loyerDeChambre(4) * 0.10,
         ]);
 
@@ -35,7 +35,7 @@ class ContratDeBailSeeder extends Seeder
             'locataire_id' => 2,
             'maison_id' => 3,
             'chambre_id' => 6,
-            'loyer_mensuel' => loyerDeChambre(6),
+            'loyer' => loyerDeChambre(6),
             'caution' => loyerDeChambre(6) * 0.10,
         ]);
 
@@ -47,7 +47,7 @@ class ContratDeBailSeeder extends Seeder
             'locataire_id' => 3,
             'maison_id' => 1,
             'chambre_id' => 2,
-            'loyer_mensuel' => loyerDeChambre(2),
+            'loyer' => loyerDeChambre(2),
             'caution' => loyerDeChambre(2) * 0.10,
         ]);
 
@@ -55,11 +55,11 @@ class ContratDeBailSeeder extends Seeder
             'date_debut' => '2024-02-01',
             'date_fin' => '2025-01-31',
             'pdf' => 'contrats/contrat_mensah_2024.pdf',
-            'statut' => 'termine', 
+            'statut' => 'inactif', 
             'locataire_id' => 4,
             'maison_id' => 1,
             'chambre_id' => 1,
-            'loyer_mensuel' => loyerDeChambre(1),
+            'loyer' => loyerDeChambre(1),
             'caution' => loyerDeChambre(1) * 0.10,
         ]);
 
@@ -71,7 +71,7 @@ class ContratDeBailSeeder extends Seeder
             'locataire_id' => 5,
             'maison_id' => 2,
             'chambre_id' => 5,
-            'loyer_mensuel' => loyerDeChambre(5),
+            'loyer' => loyerDeChambre(5),
             'caution' => loyerDeChambre(5) * 0.10,
         ]);
 
@@ -83,7 +83,7 @@ class ContratDeBailSeeder extends Seeder
             'locataire_id' => 6,
             'maison_id' => 1,
             'chambre_id' => 3,
-            'loyer_mensuel' => loyerDeChambre(3),
+            'loyer' => loyerDeChambre(3),
             'caution' => loyerDeChambre(3) * 0.10,
         ]);
     }

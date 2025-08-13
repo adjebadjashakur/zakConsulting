@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class MaisonController extends Controller
 {
+    // API: Chambres par maison (libres uniquement)
+    public function chambres($maisonId)
+    {
+        $chambres = \App\Models\Chambre::where('maison_id', $maisonId)
+            ->where('statut', 'libre')
+            ->orderBy('code_chambre')
+            ->get(['id', 'code_chambre']);
+        return response()->json($chambres);
+    }
+
     public function index()
     { 
         // Utiliser paginate() au lieu de get() pour avoir la pagination

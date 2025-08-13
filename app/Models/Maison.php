@@ -33,4 +33,9 @@ class Maison extends Model
     {
         return $this->hasMany(Chambre::class);
     }   
+        public function rapportImmobiliers()
+    {
+        return $this->hasMany(RapportImmobilier::class);
+    }
+
 }

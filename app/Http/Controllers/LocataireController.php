@@ -57,13 +57,12 @@ class LocataireController extends Controller
             'prenom' => 'required|string|max:255',
             'telephone' => 'required|string|max:255|unique:locataires,telephone',
             'email' => 'nullable|email|unique:locataires,email',
-            'date_naissance' => 'nullable|date|before:today',
             'carte_identite_recto' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'carte_identite_verso' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'situation_matrimoniale' => 'nullable|in:célibataire,marié(e),divorcé(e),veuf(ve)',
             'nationalite' => 'nullable|string|max:255',
         ]);
-
+        
         $nom_propre = strtolower(str_replace([' ', "'", '"'], '', $validated['nom']));
 
         // Traitement des fichiers
@@ -76,7 +75,6 @@ class LocataireController extends Controller
             'prenom' => ucfirst(strtolower($validated['prenom'])),
             'telephone' => $validated['telephone'],
             'email' => $validated['email'] ?? null,
-            'date_naissance' => $validated['date_naissance'] ?? null,
             'carte_identite_recto' => $recto_path,
             'carte_identite_verso' => $verso_path,
             'situation_matrimoniale' => $validated['situation_matrimoniale'] ?? null,
@@ -107,7 +105,6 @@ class LocataireController extends Controller
             'prenom' => 'required|string|max:255',
             'telephone' => 'required|string|max:255|unique:locataires,telephone,' . $locataire->id,
             'email' => 'nullable|email|unique:locataires,email,' . $locataire->id,
-            'date_naissance' => 'nullable|date|before:today',
             'carte_identite_recto' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'carte_identite_verso' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'situation_matrimoniale' => 'nullable|in:célibataire,marié(e),divorcé(e),veuf(ve)',
@@ -122,7 +119,6 @@ class LocataireController extends Controller
             'prenom' => ucfirst(strtolower($validated['prenom'])),
             'telephone' => $validated['telephone'],
             'email' => $validated['email'] ?? null,
-            'date_naissance' => $validated['date_naissance'] ?? null,
             'situation_matrimoniale' => $validated['situation_matrimoniale'] ?? null,
             'nationalite' => $validated['nationalite'] ?? 'Togolaise',
         ];

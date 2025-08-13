@@ -13,19 +13,14 @@ class ContratDeBail extends Model
         'date_debut',
         'date_fin',
         'pdf',
-        'loyer_mensuel',
+        'loyer',
         'caution',
         'statut',
         'locataire_id',
-        'maison_id'
+        'maison_id',
+        'chambre_id'
     ];
 
-    protected $casts = [
-        'date_debut' => 'date',
-        'date_fin' => 'date',
-        'loyer_mensuel' => 'decimal:2',
-        'caution' => 'decimal:2'
-    ];
 
     public function locataire()
     {

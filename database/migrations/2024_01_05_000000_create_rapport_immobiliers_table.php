@@ -10,12 +10,14 @@ return new class extends Migration
     {
         Schema::create('rapport_immobiliers', function (Blueprint $table) {
             $table->id();
-            $table->string('locataire');
             $table->decimal('total', 10, 2);
             $table->decimal('commission', 10, 2);
             $table->decimal('total_net', 10, 2);
             $table->string('mois_annee');
             $table->date('date_rapport');
+            $table->string('locataire_id')->nullable();
+            $table->string('maison_id')->nullable();
+            $table->string('chambre_id')->nullable();
             $table->foreignId('proprietaire_id')->constrained('proprietaires')->onDelete('cascade');
             $table->timestamps();
         });

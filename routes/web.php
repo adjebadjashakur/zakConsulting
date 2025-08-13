@@ -7,11 +7,14 @@ use App\Http\Controllers\MaisonController;
 use App\Http\Controllers\LocataireController;
 use App\Http\Controllers\ContratDeBailController;
 use App\Http\Controllers\RapportImmobilierController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
 });
+
+Route::get('/dashboard', [DashboardController::class,'menu'])->name('dashboard');
 
 Route::get('/proprietaires/{id}/details', [ProprietaireController::class, 'indexWithDetails'])->name('proprietaires.details');
 
@@ -23,7 +26,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Routes protégées
 Route::middleware(['auth'])->group(function () {
-
+    
 // Routes Chambres
 Route::get('/chambres', [ChambreController::class, 'index'])->name('chambres.index');
 Route::get('/chambres/create', [ChambreController::class, 'create'])->name('chambres.create');

@@ -16,18 +16,29 @@ class RapportImmobilier extends Model
         'total_net',
         'mois_annee',
         'date_rapport',
+        'locataire_id',
+        'maison_id',
+        'chambre_id',
         'proprietaire_id'
     ];
 
-    protected $casts = [
-        'total' => 'decimal:2',
-        'commission' => 'decimal:2',
-        'total_net' => 'decimal:2',
-        'date_rapport' => 'date'
-    ];
 
     public function proprietaire()
     {
         return $this->belongsTo(Proprietaire::class);
     }
+     public function locataire()
+    {
+        return $this->belongsTo(Locataire::class);
+    }
+
+    public function maison()
+    {
+        return $this->belongsTo(Maison::class);
+    }
+    public function chambre()
+    {
+        return $this->belongsTo(Chambre::class);
+    }
+
 }

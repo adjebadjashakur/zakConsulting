@@ -25,6 +25,8 @@
                     <a href="{{ route('chambres.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Chambres</a>
                     <a href="{{ route('locataires.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Locataires</a>
                     <a href="{{ route('contrat_de_bails.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Contrats</a>
+                    <a href="{{ route('rapport_immobiliers.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Rapports</a>
+                    
                 </div>
                 
                 <!-- Menu utilisateur -->
@@ -47,6 +49,16 @@
 
     
     <main class="max-w-7xl mx-auto py-6 px-4">
+        @if(session('success'))
+            <div class="mb-4 px-4 py-2 bg-green-200 text-green-800 rounded shadow">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="mb-4 px-4 py-2 bg-red-200 text-red-800 rounded shadow">
+                {{ session('error') }}
+            </div>
+        @endif
         @yield('content')
     </main>
 {{-- 

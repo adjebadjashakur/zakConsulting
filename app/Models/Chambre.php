@@ -16,6 +16,7 @@ class Chambre extends Model
         'caution',
         'statut',
         'maison_id',
+        'locataire_id'
     ];
 
     /**
@@ -33,5 +34,9 @@ class Chambre extends Model
     public function contratDeBail()
     {
         return $this->hasOne(ContratDeBail::class);
+    }
+    public function rapportImmobiliers()
+    {
+        return $this->hasMany(RapportImmobilier::class);
     }
 }

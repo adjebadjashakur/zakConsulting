@@ -13,9 +13,9 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->string('pdf')->nullable();
-            $table->decimal('loyer_mensuel')->nullable();
-            $table->decimal('caution')->nullable();
-            $table->enum('statut', ['actif', 'suspendu', 'en_attente', 'termine'])->default('actif');
+            $table->decimal('loyer');
+            $table->decimal('caution');
+            $table->enum('statut', ['actif', 'suspendu', 'inactif'])->default('actif');
             $table->foreignId('locataire_id')->constrained('locataires')->onDelete('cascade');
             $table->foreignId('maison_id')->constrained('maisons')->onDelete('cascade');
             $table->foreignId('chambre_id')->nullable()->constrained('chambres')->onDelete('cascade');

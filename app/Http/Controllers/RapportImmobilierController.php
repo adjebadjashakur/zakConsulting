@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chambre;
+use App\Models\ContratDeBail;
+use App\Models\Locataire;
+use App\Models\Maison;
 use App\Models\RapportImmobilier;
 use App\Models\Proprietaire;
 use Illuminate\Http\Request;
@@ -10,19 +14,23 @@ class RapportImmobilierController extends Controller
 {
     public function index()
     {
-        $rapports = RapportImmobilier::with('proprietaire')->get();
+        $rapports = RapportImmobilier::with('proprietaire')
+            ->orderByDesc('date_rapport')
+            ->paginate(15);
+
         return view('rapport_immobiliers.index', compact('rapports'));
     }
 
     public function create()
-    {
+    {  
+        $locataires = Locataire::all();
         $proprietaires = Proprietaire::all();
-        return view('rapport_immobiliers.create', compact('proprietaires'));
+        return view('rapport_immobiliers.create', compact( 'proprietaires', 'locataires'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'locataire' => 'required|string|max:255',
             'total' => 'required|numeric|min:0',
             'commission' => 'required|numeric|min:0',
@@ -32,7 +40,7 @@ class RapportImmobilierController extends Controller
             'proprietaire_id' => 'required|exists:proprietaires,id'
         ]);
 
-        RapportImmobilier::create($request->all());
+        RapportImmobilier::create($validated);
         return redirect()->route('rapport_immobiliers.index')->with('success', 'Rapport créé avec succès');
     }
 
@@ -43,14 +51,15 @@ class RapportImmobilierController extends Controller
     }
 
     public function edit(RapportImmobilier $rapportImmobilier)
-    {
+    {       
+        $locataires = Locataire::all();
         $proprietaires = Proprietaire::all();
-        return view('rapport_immobiliers.edit', compact('rapportImmobilier', 'proprietaires'));
+        return view('rapport_immobiliers.edit', compact('rapportImmobilier', 'proprietaires', 'locataires'));
     }
 
     public function update(Request $request, RapportImmobilier $rapportImmobilier)
     {
-        $request->validate([
+        $validated = $request->validate([
             'locataire' => 'required|string|max:255',
             'total' => 'required|numeric|min:0',
             'commission' => 'required|numeric|min:0',
@@ -60,7 +69,7 @@ class RapportImmobilierController extends Controller
             'proprietaire_id' => 'required|exists:proprietaires,id'
         ]);
 
-        $rapportImmobilier->update($request->all());
+        $rapportImmobilier->update($validated);
         return redirect()->route('rapport_immobiliers.index')->with('success', 'Rapport modifié avec succès');
     }
 

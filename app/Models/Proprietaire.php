@@ -33,4 +33,5 @@ class Proprietaire extends Model
     {
         return $this->hasOne(ContratDeBail::class);
     }
+
 }

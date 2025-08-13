@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('caution')->nullable();
             $table->enum('statut', ['libre', 'occupé', 'maintenance'])->default('libre');
             $table->foreignId('maison_id')->constrained('maisons')->onDelete('cascade');
+            $table->foreignId('locataire_id')->nullable()->constrained('locataires')->onDelete('set null');
             $table->timestamps();
         });
     }

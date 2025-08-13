@@ -21,10 +21,7 @@ class Locataire extends Model
     
     ];
 
-    protected $casts = [
-        'date_naissance' => 'date'
-    ];
-
+    
     public function contratDeBails()
     {
         return $this->hasMany(ContratDeBail::class);
@@ -33,4 +30,9 @@ class Locataire extends Model
     {
         return $this->hasOne(Chambre::class);
     }   
+        public function rapportImmobiliers()
+    {
+        return $this->hasMany(RapportImmobilier::class);
+    }
+
 }
