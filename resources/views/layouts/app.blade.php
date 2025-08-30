@@ -14,12 +14,12 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="text-xl font-bold text-blue-600">
-                    Zak_Consulting
+                <a href="{{ route('dashboard') }}">Zak_Consulting</a>
                 </div>
                 
                 <!-- Liens de navigation -->
                 <div class="hidden md:flex space-x-4">
-                    {{-- <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Tableau de bord</a> --}}
+                    <a href="{{ route('rapports_mensuels.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">RapportsM</a>
                     <a href="{{ route('proprietaires.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Propriétaires</a>
                     <a href="{{ route('maisons.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Maisons</a>
                     <a href="{{ route('chambres.index') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2">Chambres</a>
@@ -32,7 +32,7 @@
                 <!-- Menu utilisateur -->
                 @auth
                 <div class="text-gray-700">
-                    {{-- Bonjour, {{ Auth::user()->nom }} --}}
+                    {{-- Bonjour, Mr {{ Auth::user()->prenom }} --}}
                     <a href="{{ route('logout') }}" 
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                        class="ml-4 text-red-600 hover:text-red-800">

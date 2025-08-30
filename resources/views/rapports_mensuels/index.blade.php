@@ -6,7 +6,7 @@
 
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-gray-800">Rapports Mensuels</h2>
-        <a href="{{ route('rapport_immobiliers.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">Nouveau Rapport</a>
+        <a href="{{ route('rapports_mensuels.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">Nouveau Rapport</a>
     </div>
 
     @if(session('success'))
@@ -39,9 +39,9 @@
                             <td class="px-3 py-2">{{ number_format($rapport->total_net, 0, ',', ' ') }}</td>
                             <td class="px-3 py-2">{{ \Carbon\Carbon::parse($rapport->date_rapport)->format('d/m/Y') }}</td>
                             <td class="px-3 py-2 text-right space-x-2">
-                                <a href="{{ route('rapport_immobiliers.show', $rapport) }}" class="text-blue-600 hover:text-blue-800">Voir</a>
-                                <a href="{{ route('rapport_immobiliers.edit', $rapport) }}" class="text-yellow-600 hover:text-yellow-800">Modifier</a>
-                                <form action="{{ route('rapport_immobiliers.destroy', $rapport) }}" method="POST" class="inline" onsubmit="return confirm('Confirmer la suppression ?')">
+                                <a href="{{ route('rapports_mensuels.show', $rapport) }}" class="text-blue-600 hover:text-blue-800">Voir</a>
+                                <a href="{{ route('rapports_mensuels.edit', $rapport) }}" class="text-yellow-600 hover:text-yellow-800">Modifier</a>
+                                <form action="{{ route('rapports_mensuels.destroy', $rapport) }}" method="POST" class="inline" onsubmit="return confirm('Confirmer la suppression ?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-800">Supprimer</button>
                                 </form>
@@ -51,7 +51,7 @@
                     </tbody>
                 </table>
             </div>
-            <p class="text-right font-semibold mt-2">Total propriétaire : {{ number_format($listeRapports->sum('total_net'),0,',',' ') }}</p>
+            <p class="text-right font-semibold mt-2">Total propriétaire : {{ number_format($listeRapports->sum('total'),0,',',' ') }}</p>
         </div>
     @empty
         <div class="p-4 text-gray-500 text-center bg-white rounded shadow">Aucun rapport pour ce mois.</div>

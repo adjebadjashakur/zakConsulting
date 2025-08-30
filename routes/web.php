@@ -8,6 +8,7 @@ use App\Http\Controllers\LocataireController;
 use App\Http\Controllers\ContratDeBailController;
 use App\Http\Controllers\RapportImmobilierController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RapportMensuelController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -71,6 +72,19 @@ Route::get('/contrat-de-bails/{contratDeBail}', [ContratDeBailController::class,
 Route::get('/contrat-de-bails/{contratDeBail}/edit', [ContratDeBailController::class, 'edit'])->name('contrat_de_bails.edit');
 Route::put('/contrat-de-bails/{contratDeBail}', [ContratDeBailController::class, 'update'])->name('contrat_de_bails.update');
 Route::delete('/contrat-de-bails/{contratDeBail}', [ContratDeBailController::class, 'destroy'])->name('contrat_de_bails.destroy');
+
+
+
+
+// Routes Rapports Mensuels
+Route::get('/rapports-mensuels', [RapportMensuelController::class, 'index'])->name('rapports_mensuels.index');
+Route::get('/rapports-mensuels/create', [RapportMensuelController::class, 'create'])->name('rapports_mensuels.create');
+Route::post('/rapports-mensuels', [RapportMensuelController::class, 'store'])->name('rapports_mensuels.store');
+Route::get('/rapports-mensuels/{rapportMensuel}', [RapportMensuelController::class, 'show'])->name('rapports_mensuels.show');
+Route::get('/rapports-mensuels/{rapportMensuel}/edit', [RapportMensuelController::class, 'edit'])->name('rapports_mensuels.edit');
+Route::put('/rapports-mensuels/{rapportMensuel}', [RapportMensuelController::class, 'update'])->name('rapports_mensuels.update');
+Route::delete('/rapports-mensuels/{rapportMensuel}', [RapportMensuelController::class, 'destroy'])->name('rapports_mensuels.destroy');
+
 
 // Routes Rapports Immobiliers
 Route::get('/rapport-immobiliers', [RapportImmobilierController::class, 'index'])->name('rapport_immobiliers.index');

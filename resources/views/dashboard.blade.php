@@ -38,22 +38,22 @@
     <h2 class="text-2xl font-semibold mb-4">Gestion rapide</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <a href="{{ route('proprietaires.index') }}" class="block bg-blue-500 text-white p-6 rounded-lg shadow hover:bg-blue-600">
-            📋 Gérer les Propriétaires
+            Gérer les Propriétaires
         </a>
         <a href="{{ route('locataires.index') }}" class="block bg-blue-500 text-white p-6 rounded-lg shadow hover:bg-blue-600">
-            🏠 Gérer les Locataires
+            Gérer les Locataires
         </a>
         <a href="{{ route('maisons.index') }}" class="block bg-blue-500 text-white p-6 rounded-lg shadow hover:bg-blue-600">
-            🏘️ Gérer les Maisons
+            Gérer les Maisons
         </a>
         <a href="{{ route('chambres.index') }}" class="block bg-blue-500 text-white p-6 rounded-lg shadow hover:bg-blue-600">
-            🛏️ Gérer les Chambres
+            Gérer les Chambres
         </a>
         <a href="{{ route('contrat_de_bails.index') }}" class="block bg-blue-500 text-white p-6 rounded-lg shadow hover:bg-blue-600">
-            📄 Gérer les Contrats de Bail
+            Gérer les Contrats de Bail
         </a>
         <a href="{{ route('rapport_immobiliers.index') }}" class="block bg-blue-500 text-white p-6 rounded-lg shadow hover:bg-blue-600">
-            📊 Consulter les Rapports
+            Consulter les Rapports
         </a>
     </div>
 </div>

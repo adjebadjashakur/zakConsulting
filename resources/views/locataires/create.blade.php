@@ -32,7 +32,7 @@
                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
         </div>
-                <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="grid grid-cols-2 gap-4 mb-6">
             <div>
                 <label for="carte_identite_recto" class="block text-sm font-medium text-gray-700 mb-2">Carte d'identité (Recto)</label>
                 <input type="file" name="carte_identite_recto" id="carte_identite_recto"
@@ -61,14 +61,7 @@
         <option value="Divorcé(e)" {{ old('situation_matrimoniale') == 'Divorcé(e)' ? 'selected' : '' }}>Divorcé(e)</option>
         <option value="Veuf(ve)" {{ old('situation_matrimoniale') == 'Veuf(ve)' ? 'selected' : '' }}>Veuf(ve)</option>
     </select>
-</div>
-
-
-        </div>
-
-
-     
-
+    </div>
         <div class="flex justify-end space-x-4">
             <a href="{{ route('locataires.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
                 Annuler
@@ -78,5 +71,6 @@
             </button>
         </div>
     </form>
+</div>
 </div>
 @endsection

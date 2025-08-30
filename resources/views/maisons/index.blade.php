@@ -3,7 +3,7 @@
 @section('title', 'Liste des Maisons')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
+<div class="flex justify-between items-center  mb-6 ">
     <h2 class="text-2xl font-bold">Liste des Maisons</h2>
     <a href="{{ route('maisons.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
         Nouvelle Maison

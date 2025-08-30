@@ -44,45 +44,61 @@ class LocataireController extends Controller
         return view('locataires.index', compact('locataires'));
     }
 
-    public function create()
+       public function create()
     {
         return view('locataires.create');
     }
+            public function store(Request $request)
+{
+    // Validation des données
+    $validated = $request->validate([
+        'nom' => 'required|string|max:255',
+        'prenom' => 'required|string|max:255',
+        'telephone' => 'required|string|max:255',
+        'email' => 'nullable|email|unique:locataires,email',
+        'carte_identite_recto' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        'carte_identite_verso' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        'situation_matrimoniale' => 'nullable|string|max:255',
+        'nationalite' => 'nullable|string|max:255',
+    ]);
 
-    public function store(Request $request)
-    {
-        // Validation des données
-        $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'telephone' => 'required|string|max:255|unique:locataires,telephone',
-            'email' => 'nullable|email|unique:locataires,email',
-            'carte_identite_recto' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'carte_identite_verso' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'situation_matrimoniale' => 'nullable|in:célibataire,marié(e),divorcé(e),veuf(ve)',
-            'nationalite' => 'nullable|string|max:255',
-        ]);
-        
-        $nom_propre = strtolower(str_replace([' ', "'", '"'], '', $validated['nom']));
+    $nom_propre = strtolower(str_replace(' ', '', $validated['nom']));
 
-        // Traitement des fichiers
-        $recto_path = $this->uploadFile($request, 'carte_identite_recto', $nom_propre, 'recto');
-        $verso_path = $this->uploadFile($request, 'carte_identite_verso', $nom_propre, 'verso');
+    // Initialiser les chemins
+    $recto_path = null;
+    $verso_path = null;
 
-        // Création du locataire
-        Locataire::create([
-            'nom' => ucfirst(strtolower($validated['nom'])),
-            'prenom' => ucfirst(strtolower($validated['prenom'])),
-            'telephone' => $validated['telephone'],
-            'email' => $validated['email'] ?? null,
-            'carte_identite_recto' => $recto_path,
-            'carte_identite_verso' => $verso_path,
-            'situation_matrimoniale' => $validated['situation_matrimoniale'] ?? null,
-            'nationalite' => $validated['nationalite'] ?? 'Togolaise',
-        ]);
-
-        return redirect()->route('locataires.index')->with('success', 'Locataire créé avec succès');
+    // Traitement du fichier carte d'identité RECTO
+    if ($request->hasFile('carte_identite_recto')) {
+        $file = $request->file('carte_identite_recto');
+        $extension = $file->getClientOriginalExtension();
+        $file_name = $nom_propre . '_carte_recto.' . $extension;
+        $recto_path = $file->storeAs('Locataires_carte_identites', $file_name, 'public');
     }
+
+    // Traitement du fichier carte d'identité VERSO
+    if ($request->hasFile('carte_identite_verso')) {
+        $file = $request->file('carte_identite_verso');
+        $extension = $file->getClientOriginalExtension();
+        $file_name = $nom_propre . '_carte_verso.' . $extension;
+        $verso_path = $file->storeAs('Locataires_carte_identites', $file_name, 'public');
+    }
+
+    // Création du locataire
+    Locataire::create([
+        'nom' => $validated['nom'],
+        'prenom' => $validated['prenom'],
+        'telephone' => $validated['telephone'],
+        'email' => $validated['email'] ?? null,
+        'carte_identite_recto' => $recto_path,
+        'carte_identite_verso' => $verso_path,
+        'situation_matrimoniale' => $validated['situation_matrimoniale'] ?? null,
+        'nationalite' => $validated['nationalite'] ?? 'Togolaise',
+    ]);
+
+    return redirect()->route('locataires.index')->with('success', 'Locataire créé avec succès');
+}
+
 
     public function show(Locataire $locataire)
     {
